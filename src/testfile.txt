@@ -1,3 +1,3 @@
-Ceci est un test
-Sur plusieurs lignes
-Afin de vérifier si la méthode fonctionne
+Pseudo;mdp;Admin;image
+Hailwell;secret;true;/src/img/PP1.png
+Araonof;starWars22;false;/src/img/PP2.png
