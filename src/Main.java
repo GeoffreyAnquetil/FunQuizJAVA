@@ -8,11 +8,9 @@ public class Main {
 
         System.out.println();
 
-        for(String[] ligne : test){
-            for(String mot : ligne){
-                System.out.print(mot + " / ");
-            }
-            System.out.println();
-        }
+        System.out.println(fileScan.getData("IsAdmin","0001"));
+        System.out.println(fileScan.getData("Pseudo","0002"));
+        System.out.println(fileScan.getData("Caca","0001"));
+        System.out.println(fileScan.getData("IsAdmin","0003"));
     }
 }
