@@ -1,18 +1,14 @@
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class FileScan {
-    private String path; // L'adresse du fichier texte
-    private FileReader fileReader;
-    private BufferedReader bufferedReader;
+    private final String path; // L'adresse du fichier texte
 
     /**
-     * Classe permettant de traiter des données entrantes et sortantes d'un fichier texte (lecture, écriture...)
-     * @param path
+     * Classe qui permet de gérer la lecture dans un fichier
+     * @param path chemin vers le fichier à lire
      */
     public FileScan(String path){
         this.path = path;
@@ -24,7 +20,7 @@ public class FileScan {
      * @param id l'id qui nous intéresse
      * @return
      */
-    public String getData(String field, String id) {
+    public String getData(String field, String id) throws IOException {
         boolean fieldExists = false;
         ArrayList<String[]> tab = this.toTab();
         for (int i = 0; i < tab.size(); i++) {
@@ -43,14 +39,9 @@ public class FileScan {
      *  colonnes par les ; dans le fichier texte
      *
      */
-    public ArrayList<String[]> toTab(){
-        try {
-            // Cette ligne peut causer une erreur de type IO si le fichier n'est pas trouvé
-            this.fileReader = new FileReader(path);
-            bufferedReader = new BufferedReader(fileReader);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+    public ArrayList<String[]> toTab() throws IOException{
+        FileReader fileReader = new FileReader(path);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
         ArrayList<String[]> res = new ArrayList<String[]>();
         try {
             String line = bufferedReader.readLine();
@@ -67,14 +58,10 @@ public class FileScan {
     /**
      * Print ligne par ligne le contenu du fichier ciblé
      */
-    public void printLineByLine() {
-        try {
-            // Cette ligne peut causer une erreur de type IO si le fichier n'est pas trouvé
-            this.fileReader = new FileReader(path);
-            bufferedReader = new BufferedReader(fileReader);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+    public void printLineByLine() throws IOException{
+        //Déclarations
+        FileReader fileReader = new FileReader(path);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
         try {
             String line = bufferedReader.readLine();
             while (line != null) {
