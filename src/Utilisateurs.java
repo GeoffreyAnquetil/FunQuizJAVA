@@ -1,7 +1,10 @@
-import java.io.*;
-
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Classe permettant de stocker les utilisateurs inscrits au quiz dans un fichier texte
@@ -46,7 +49,7 @@ public class Utilisateurs implements Serializable {
         } this.users = utilisateursDes;
     }
 
-    public Map<String, Personne> getUsers() {
+    public HashMap<String, Personne> getUsers() {
         return users;
     }
 
