@@ -10,14 +10,14 @@ import java.util.HashMap;
  * Classe permettant de stocker les utilisateurs inscrits au quiz dans un fichier texte
  */
 public class Utilisateurs implements Serializable {
-    private HashMap<String, Personne> users;
+    private HashMap<String, Utilisateur> users;
 
     // Chemin vers le fichier où sont stockés les utilisateurs enregistrés
     private final String path = "./src/users/usersData.txt";
 
     public Utilisateurs(){}
 
-    public Utilisateurs(HashMap<String, Personne> users) {
+    public Utilisateurs(HashMap<String, Utilisateur> users) {
         this.users = users;
     }
 
@@ -39,22 +39,26 @@ public class Utilisateurs implements Serializable {
      * Désérialise un objet contenu dans un fichier
      */
     public void deserialize(){
-        HashMap<String, Personne> utilisateursDes = null;
+        HashMap<String, Utilisateur> utilisateursDes = null;
         try{
             FileInputStream fichier = new FileInputStream(path);
             ObjectInputStream ois = new ObjectInputStream(fichier);
-            utilisateursDes = (HashMap<String, Personne>)ois.readObject();
-            ois.close();
+            try{
+                utilisateursDes = (HashMap<String, Utilisateur>)ois.readObject();
+                ois.close();
+            } catch(ClassCastException e){
+                e.printStackTrace();
+            }
         } catch (IOException | ClassNotFoundException e){
             e.printStackTrace();
         } this.users = utilisateursDes;
     }
 
-    public HashMap<String, Personne> getUsers() {
+    public HashMap<String, Utilisateur> getUsers() {
         return users;
     }
 
-    public void setUsers(HashMap<String, Personne> users) {
+    public void setUsers(HashMap<String, Utilisateur> users) {
         this.users = users;
     }
 }
