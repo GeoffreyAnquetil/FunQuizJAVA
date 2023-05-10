@@ -4,34 +4,23 @@ import java.io.Serializable;
  * Classe représentant une personne
  */
 public class Personne implements Serializable {
-    //Id;Pseudo;Password;IsAdmin;Image
-    private String id; // id unique
+    //Pseudo;Password;IsAdmin;Image
     private String pseudo; // pseudo de la personne
     private String password; // mot de passe de la personne
     private boolean isAdmin; // booléen indiquant si la personne est admin
     private String Image; // chemin vers l'image de la personne
 
     /**
-     * @param id id unique
      * @param pseudo pseudo de la personne
      * @param password mot de passe de la personne
      * @param isAdmin booléen indiquant si la personne est admin
      * @param image chemin vers l'image de la personne
      */
-    public Personne(String id, String pseudo, String password, boolean isAdmin, String image) {
-        this.id = id;
+    public Personne(String pseudo, String password, boolean isAdmin, String image) {
         this.pseudo = pseudo;
         this.password = password;
         this.isAdmin = isAdmin;
         Image = image;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getPseudo() {
