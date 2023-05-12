@@ -1,5 +1,3 @@
-import org.w3c.dom.ls.LSOutput;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -76,8 +74,14 @@ public class GameLogin extends JFrame implements ActionListener{
                 Utilisateurs users = new Utilisateurs();
                 users.deserialize();
 
-                if(mdp.equals(users.getUsers().get(pseudo).getMdp())) System.out.println("Bon mdp");
-                else System.out.println("Mauvais mdp");
+                if(users.getUsers().get(pseudo) == null){
+                    JOptionPane.showMessageDialog(loginPanel, "Cet utilisateur n'existe pas");
+                } else {
+                    if(mdp.equals(users.getUsers().get(pseudo).getMdp())){
+                        successfulLogin();
+                    }
+                    else JOptionPane.showMessageDialog(loginPanel, "Mauvais mot de passe");
+                }
             }
         });
         loginPanel.add(loginButton);
@@ -87,6 +91,11 @@ public class GameLogin extends JFrame implements ActionListener{
 
         // On affiche la fenêtre
         setVisible(true);
+    }
+
+    private void successfulLogin(){
+        this.dispose();
+        new GameHomePage();
     }
 
     @Override
