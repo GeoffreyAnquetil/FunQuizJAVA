@@ -1,10 +1,6 @@
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
-import java.io.IOException;
-import java.io.Serializable;
+import java.io.*;
 import java.util.HashMap;
+
 
 /**
  * Classe permettant de stocker les utilisateurs inscrits au quiz dans un fichier texte
@@ -38,20 +34,16 @@ public class Utilisateurs implements Serializable {
     /**
      * Désérialise un objet contenu dans un fichier
      */
-    public void deserialize(){
-        HashMap<String, Utilisateur> utilisateursDes = null;
-        try{
+    public void deserialize() {
+        HashMap<String, Utilisateur> u = new HashMap<String, Utilisateur>();
+        try {
             FileInputStream fichier = new FileInputStream(path);
             ObjectInputStream ois = new ObjectInputStream(fichier);
-            try{
-                utilisateursDes = (HashMap<String, Utilisateur>)ois.readObject();
-                ois.close();
-            } catch(ClassCastException e){
-                e.printStackTrace();
-            }
+            u = (HashMap<String, Utilisateur>) ois.readObject();
+            ois.close();
         } catch (IOException | ClassNotFoundException e){
             e.printStackTrace();
-        } this.users = utilisateursDes;
+        } users = u;
     }
 
     public HashMap<String, Utilisateur> getUsers() {

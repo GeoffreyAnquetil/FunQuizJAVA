@@ -1,3 +1,4 @@
+import java.io.Serial;
 import java.io.Serializable;
 
 public class Personne implements Serializable {
@@ -5,6 +6,12 @@ public class Personne implements Serializable {
     private String prenom;
     private String nom;
     private int age;
+
+    // Bugfix qui permet de sérialiser correctement
+    @Serial
+    private static final long serialVersionUID = 2977695184832216321L;
+
+    public Personne(){}
 
     public Personne(String prenom, String nom, int age) {
         this.prenom = prenom;
