@@ -1,3 +1,5 @@
+import org.w3c.dom.ls.LSOutput;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -6,13 +8,13 @@ import java.awt.event.ActionListener;
 /**
  * Fenêtre de login du jeu
  */
-public class GameLogin extends JFrame{
+public class GameLogin extends JFrame implements ActionListener{
 
     public GameLogin(){
         // On crée une fenêtre JFrame avec pour titre Login
         super("Login");
         // On définit sa taille à 400x400
-        setSize(400,400);
+        setSize(400,200);
         // On fait en sorte que le programme termine lorsqu'elle est fermée
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         // On affiche la fenêtre au centre
@@ -25,6 +27,7 @@ public class GameLogin extends JFrame{
         Dimension dimLabel = new Dimension(this.getWidth()/2,25);
         Dimension dimTextArea = new Dimension(this.getWidth()/2,25);
         Dimension dimPasswordField = new Dimension(this.getWidth()/2,25);
+        Dimension dimButton = new Dimension(this.getWidth(),40);
 
         // Fonts
         Font fontLabel = new Font("Arial", Font.BOLD, 20);
@@ -61,6 +64,24 @@ public class GameLogin extends JFrame{
         passwordField.setPreferredSize(dimPasswordField);
         loginPanel.add(passwordField);
 
+        // On instancie un JButton pour se logger
+        JButton loginButton = new JButton("Login");
+        loginButton.setPreferredSize(dimButton);
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String pseudo = areaID.getText();
+                String mdp = String.copyValueOf(passwordField.getPassword());
+
+                Utilisateurs users = new Utilisateurs();
+                users.deserialize();
+
+                if(mdp.equals(users.getUsers().get(pseudo).getMdp())) System.out.println("Bon mdp");
+                else System.out.println("Mauvais mdp");
+            }
+        });
+        loginPanel.add(loginButton);
+
         // On ajoute le JPanel au JFrame
         this.add(loginPanel);
 
@@ -68,4 +89,8 @@ public class GameLogin extends JFrame{
         setVisible(true);
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
 }
