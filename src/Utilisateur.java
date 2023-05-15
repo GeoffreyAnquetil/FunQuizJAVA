@@ -1,3 +1,4 @@
+import java.io.Serial;
 import java.io.Serializable;
 
 public class Utilisateur extends Personne implements Serializable {
@@ -6,11 +7,22 @@ public class Utilisateur extends Personne implements Serializable {
     private String mdp;
     private boolean isAdmin;
 
+    @Serial
+    private static final long  serialVersionUID = 3975315987111895119L;
+
+    public Utilisateur(){}
+
     public Utilisateur(String prenom, String nom, int age, String pseudo, String mdp, boolean isAdmin) {
         super(prenom, nom, age);
         this.pseudo = pseudo;
         this.mdp = mdp;
         this.isAdmin = isAdmin;
+    }
+
+    @Override
+    public String toString(){
+        return this.getPrenom() + "," + this.getNom() + "," + this.getAge() + ","
+                + pseudo + "," + mdp + "," + isAdmin;
     }
 
     public boolean isAdmin() {

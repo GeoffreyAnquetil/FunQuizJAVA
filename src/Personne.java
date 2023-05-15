@@ -13,6 +13,11 @@ public class Personne implements Serializable {
 
     public Personne(){}
 
+    @Override
+    public String toString(){
+        return prenom + "," + nom + "," + age;
+    }
+
     public Personne(String prenom, String nom, int age) {
         this.prenom = prenom;
         this.nom = nom;
