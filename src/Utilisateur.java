@@ -5,7 +5,7 @@ public class Utilisateur extends Personne implements Serializable {
 
     private String pseudo;
     private String mdp;
-    private boolean isAdmin;
+    private boolean isAdmin = false;
 
     @Serial
     private static final long  serialVersionUID = 3975315987111895119L;
