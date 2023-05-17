@@ -45,9 +45,7 @@ public class CSVFileIO {
         while((line = bufferedReader.readLine()) != null){
             tab.add(line.split(","));
         }
-
         return tab;
     }
-
 }
 
