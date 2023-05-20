@@ -5,7 +5,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        new GameSplashScreen();
+        //new GameSplashScreen();
         GameLogin gameLogin = new GameLogin();
 
     }

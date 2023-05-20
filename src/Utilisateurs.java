@@ -7,7 +7,7 @@ import java.util.HashMap;
  * Classe permettant de stocker les utilisateurs inscrits au quiz dans un fichier texte
  */
 public class Utilisateurs implements Serializable {
-    private HashMap<String, Utilisateur> users;
+    private HashMap<String, Utilisateur> users = new HashMap<>();
 
     public Utilisateurs(){}
 
