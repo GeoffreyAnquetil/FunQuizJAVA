@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Objects;
 
 /**
  * Fenêtre de login du jeu
@@ -49,15 +50,24 @@ public class GameLogin extends JFrame implements ActionListener{
         if(e.getSource() == signInButton){
             try {
                 String userID = idTextField.getText(); // On récupère l'id saisi
-                String userPW = Arrays.toString(pwField.getPassword()); // On récupère le mdp saisi
+                String userPW = new String(pwField.getPassword()); // On récupère le mdp saisi
+
+                System.out.println(userID + " " + userPW);
 
                 Utilisateurs utilisateurs = new Utilisateurs();
                 utilisateurs.deserialize("./src/users/usersData.csv");
 
                 HashMap<String, Utilisateur> hashMap = utilisateurs.getUsers();
 
+                System.out.println(hashMap.get(userID).getPseudo() + " " + hashMap.get(userID).getMdp());
+
                 if(hashMap.get(userID) == null){
                     JOptionPane.showMessageDialog(this, "Cet utilisateur n'existe pas");
+                } else if(!(Objects.equals(hashMap.get(userID).getMdp(), userPW))){
+                    JOptionPane.showMessageDialog(this, "Mauvais mot de passe");
+                } else {
+                    this.dispose();
+                    new GameHomePage(hashMap.get(userID));
                 }
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
