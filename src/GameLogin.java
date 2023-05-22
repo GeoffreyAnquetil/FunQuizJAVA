@@ -62,8 +62,10 @@ public class GameLogin extends JFrame implements ActionListener{
 
             if(hashMap.get(userID) == null){
                 JOptionPane.showMessageDialog(this, "Cet utilisateur n'existe pas");
-            } else if(!(Objects.equals(hashMap.get(userID).getMdp(), userPW))){
+            } else if(!(Objects.equals(hashMap.get(userID).getMdp(), userPW))) {
                 JOptionPane.showMessageDialog(this, "Mauvais mot de passe");
+            } else if(hashMap.get(userID).isSuspendu()){
+                JOptionPane.showMessageDialog(this, "Compte suspendu, impossible de se connecter");
             } else {
                 this.dispose();
                 new GameHomePage(users.getUsers().get(userID), users);
