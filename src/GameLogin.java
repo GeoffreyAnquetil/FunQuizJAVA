@@ -13,6 +13,8 @@ import java.util.Objects;
  */
 public class GameLogin extends JFrame implements ActionListener{
 
+    Utilisateurs users;
+
     private JLabel idLabel = new JLabel("Identifiant :"); // Label identifiant
     private JLabel pwLabel = new JLabel("Mot de passe :"); // Label mot de passe
 
@@ -22,8 +24,11 @@ public class GameLogin extends JFrame implements ActionListener{
     private JButton signInButton = new JButton("Se connecter"); // bouton de login
     private JButton signUpButton = new JButton("S'inscrire"); // bouton d'inscription
 
-    public GameLogin() throws IOException {
+    public GameLogin(Utilisateurs users) throws IOException {
         super("Connexion"); // On set le titre à Connexion
+
+        this.users = users;
+
         this.setLocationRelativeTo(null); // La fenêtre apparait au centre de l'écran
         this.setDefaultCloseOperation(EXIT_ON_CLOSE); // Le processus termine quand la fenêtre est fermée
         this.setVisible(true); // On affiche la fenêtre
@@ -54,14 +59,10 @@ public class GameLogin extends JFrame implements ActionListener{
                 String userID = idTextField.getText(); // On récupère l'id saisi
                 String userPW = new String(pwField.getPassword()); // On récupère le mdp saisi
 
-                System.out.println(userID + " " + userPW);
-
                 Utilisateurs utilisateurs = new Utilisateurs();
                 utilisateurs.deserialize("./src/users/usersData.csv");
 
-                HashMap<String, Utilisateur> hashMap = utilisateurs.getUsers();
-
-                System.out.println(hashMap.get(userID).getPseudo() + " " + hashMap.get(userID).getMdp());
+                HashMap<String, Utilisateur> hashMap = users.getUsers();
 
                 if(hashMap.get(userID) == null){
                     JOptionPane.showMessageDialog(this, "Cet utilisateur n'existe pas");
@@ -76,7 +77,7 @@ public class GameLogin extends JFrame implements ActionListener{
             }
         } else if(e.getSource() == signUpButton){
             this.dispose();
-            new GameSignUp();
+            new GameSignUp(users);
         }
     }
 }

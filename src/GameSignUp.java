@@ -2,8 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class GameSignUp extends JFrame implements ActionListener {
+
+    private Utilisateurs users;
 
     private JLabel prenomLabel = new JLabel("Prenom :");
     private JLabel nomLabel = new JLabel("Nom :");
@@ -20,8 +23,11 @@ public class GameSignUp extends JFrame implements ActionListener {
     private JButton retourButton = new JButton("Retour");
     private JButton signupButton = new JButton("S'inscrire");
 
-    public GameSignUp(){
+    public GameSignUp(Utilisateurs users){
         super("Inscription"); // On set le titre à Connexion
+
+        this.users = users;
+
         this.setLocationRelativeTo(null); // La fenêtre apparait au centre de l'écran
         this.setDefaultCloseOperation(EXIT_ON_CLOSE); // Le processus termine quand la fenêtre est fermée
         this.setVisible(true); // On affiche la fenêtre
@@ -55,6 +61,13 @@ public class GameSignUp extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        if(e.getSource() == retourButton){
+            try {
+                this.dispose();
+                new GameLogin(users);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
     }
 }

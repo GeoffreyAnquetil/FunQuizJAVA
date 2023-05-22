@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.io.IOException;
 
 /**
  * Splash screen au lancement du jeu
@@ -13,7 +14,7 @@ public class GameSplashScreen extends JWindow {
     Image splashscreen; // Objet de type Image de awt
     ImageIcon imageIcon; // Objet de type ImageIcon de swing
 
-    public GameSplashScreen(){
+    public GameSplashScreen() throws IOException {
         // Chemin d'accès à l'image du splash
         String splashPath = "./src/img/splash.png";
         // On récupère l'image de splash screen dans l'objet Image
@@ -32,9 +33,15 @@ public class GameSplashScreen extends JWindow {
         // On affiche le splashScreen
         setVisible(true);
         // On ne l'affiche que 3sec
+
+        //Instanciation des objets nécessaire au jeu
+        Utilisateurs utilisateurs = new Utilisateurs();
+        utilisateurs.deserialize("./src/users/usersData.csv");
+
         try{
-            Thread.sleep(3000);
+            Thread.sleep(1000);
             dispose();
+            new GameLogin(utilisateurs); // On lance la fenêtre de login
         } catch(Exception e){
             e.printStackTrace();
         }
