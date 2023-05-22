@@ -15,8 +15,10 @@ public class GameLogin extends JFrame implements ActionListener{
 
     private JLabel idLabel = new JLabel("Identifiant :"); // Label identifiant
     private JLabel pwLabel = new JLabel("Mot de passe :"); // Label mot de passe
+
     private JTextField idTextField = new JTextField(); // zone de texte pour ID
     private JPasswordField pwField = new JPasswordField(); // zone de texte pour MDP
+
     private JButton signInButton = new JButton("Se connecter"); // bouton de login
     private JButton signUpButton = new JButton("S'inscrire"); // bouton d'inscription
 
