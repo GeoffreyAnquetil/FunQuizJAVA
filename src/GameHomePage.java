@@ -54,6 +54,12 @@ public class GameHomePage extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        if(e.getSource() == soloButton){
+            new GameSoloMode(user, users);
+            this.dispose();
+        } else if(e.getSource() == multiButton){
+            new GameMultiMode(user, users);
+            this.dispose();
+        }
     }
 }
