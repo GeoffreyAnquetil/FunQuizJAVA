@@ -87,7 +87,7 @@ public class GameSignUp extends JFrame implements ActionListener {
             }
 
             this.dispose();
-            new GameHomePage(users);
+            new GameHomePage(user, users);
         }
     }
 }

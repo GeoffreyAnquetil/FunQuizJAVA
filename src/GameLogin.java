@@ -66,7 +66,7 @@ public class GameLogin extends JFrame implements ActionListener{
                 JOptionPane.showMessageDialog(this, "Mauvais mot de passe");
             } else {
                 this.dispose();
-                new GameHomePage(users);
+                new GameHomePage(users.getUsers().get(userID), users);
             }
         } else if(e.getSource() == signUpButton){
             this.dispose();
