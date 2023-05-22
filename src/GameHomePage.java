@@ -4,8 +4,13 @@ import java.awt.event.ActionListener;
 
 public class GameHomePage extends JFrame implements ActionListener {
 
-    public GameHomePage(Utilisateur user){
+    private Utilisateurs users;
+
+    public GameHomePage(Utilisateurs users){
         super("FunQuiz");
+
+        this.users = users;
+
         setSize(800,800);
         // On fait en sorte que le programme termine lorsqu'elle est fermée
         setDefaultCloseOperation(EXIT_ON_CLOSE);

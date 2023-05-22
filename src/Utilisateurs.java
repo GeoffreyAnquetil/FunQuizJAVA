@@ -58,7 +58,8 @@ public class Utilisateurs implements Serializable {
                                                 Integer.parseInt(utilisateur[2]),
                                                 utilisateur[3],
                                                 utilisateur[4],
-                                                Boolean.parseBoolean(utilisateur[5]));
+                                                Boolean.parseBoolean(utilisateur[5]),
+                                                Boolean.parseBoolean(utilisateur[6]));
             users.put(user.getPseudo(), user);
         }
     }

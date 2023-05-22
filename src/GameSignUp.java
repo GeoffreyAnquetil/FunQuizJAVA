@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.HashMap;
 
 public class GameSignUp extends JFrame implements ActionListener {
 
@@ -68,6 +69,25 @@ public class GameSignUp extends JFrame implements ActionListener {
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
+        } else if(e.getSource() == signupButton){
+            String prenom = prenomField.getText();
+            String nom = nomField.getText();
+            int age = Integer.parseInt(ageField.getText());
+            String pseudo = pseudoField.getText();
+            String mdp = new String(mdpField.getPassword());
+
+            Utilisateur user = new Utilisateur(prenom, nom, age, pseudo, mdp, false, false);
+            HashMap<String, Utilisateur> hashMap = users.getUsers();
+            hashMap.put(user.getPseudo(), user);
+            users.setUsers(hashMap);
+            try {
+                users.serialize("./src/users/usersData.csv");
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+
+            this.dispose();
+            new GameHomePage(users);
         }
     }
 }

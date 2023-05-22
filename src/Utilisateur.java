@@ -13,11 +13,12 @@ public class Utilisateur extends Personne implements Serializable {
 
     public Utilisateur(){}
 
-    public Utilisateur(String prenom, String nom, int age, String pseudo, String mdp, boolean isAdmin) {
+    public Utilisateur(String prenom, String nom, int age, String pseudo, String mdp, boolean isAdmin, boolean suspendu) {
         super(prenom, nom, age);
         this.pseudo = pseudo;
         this.mdp = mdp;
         this.isAdmin = isAdmin;
+        this.suspendu = suspendu;
     }
 
     @Override
@@ -48,5 +49,13 @@ public class Utilisateur extends Personne implements Serializable {
 
     public void setMdp(String mdp) {
         this.mdp = mdp;
+    }
+
+    public boolean isSuspendu() {
+        return suspendu;
+    }
+
+    public void setSuspendu(boolean suspendu) {
+        this.suspendu = suspendu;
     }
 }

@@ -55,25 +55,18 @@ public class GameLogin extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == signInButton){
-            try {
-                String userID = idTextField.getText(); // On récupère l'id saisi
-                String userPW = new String(pwField.getPassword()); // On récupère le mdp saisi
+            String userID = idTextField.getText(); // On récupère l'id saisi
+            String userPW = new String(pwField.getPassword()); // On récupère le mdp saisi
 
-                Utilisateurs utilisateurs = new Utilisateurs();
-                utilisateurs.deserialize("./src/users/usersData.csv");
+            HashMap<String, Utilisateur> hashMap = users.getUsers();
 
-                HashMap<String, Utilisateur> hashMap = users.getUsers();
-
-                if(hashMap.get(userID) == null){
-                    JOptionPane.showMessageDialog(this, "Cet utilisateur n'existe pas");
-                } else if(!(Objects.equals(hashMap.get(userID).getMdp(), userPW))){
-                    JOptionPane.showMessageDialog(this, "Mauvais mot de passe");
-                } else {
-                    this.dispose();
-                    new GameHomePage(hashMap.get(userID));
-                }
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
+            if(hashMap.get(userID) == null){
+                JOptionPane.showMessageDialog(this, "Cet utilisateur n'existe pas");
+            } else if(!(Objects.equals(hashMap.get(userID).getMdp(), userPW))){
+                JOptionPane.showMessageDialog(this, "Mauvais mot de passe");
+            } else {
+                this.dispose();
+                new GameHomePage(users);
             }
         } else if(e.getSource() == signUpButton){
             this.dispose();
