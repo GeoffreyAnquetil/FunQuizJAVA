@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class GameHomePage extends JFrame implements ActionListener {
 
@@ -15,6 +16,7 @@ public class GameHomePage extends JFrame implements ActionListener {
 
     private JButton soloButton = new JButton("Jeu Solo");
     private JButton multiButton = new JButton("Jeu Multi");
+    private JButton adminButton = new JButton("Administration");
 
     public GameHomePage(Utilisateur user, Utilisateurs users){
         super("FunQuiz");
@@ -33,8 +35,13 @@ public class GameHomePage extends JFrame implements ActionListener {
         GridLayout grilleMain = new GridLayout(3,1); // On crée une grille 3,1
         this.setLayout(grilleMain); // On set le layout de la frame à cette grille
 
-        GridLayout grilleSec = new GridLayout(1,2); // On crée une grille 1,2
-        panel.setLayout(grilleSec); // On set le layout du panel à cette grille
+        GridLayout grilleSec;
+        if(user.isAdmin()){
+            grilleSec = new GridLayout(1, 3);
+        } else {
+            grilleSec = new GridLayout(1, 2);
+        }
+        panel.setLayout(grilleSec);
 
         welcomeLabel.setText("Bienvenue " + user.getPseudo() + " !");
         welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -48,6 +55,10 @@ public class GameHomePage extends JFrame implements ActionListener {
 
         panel.add(soloButton);
         panel.add(multiButton);
+        if(user.isAdmin()){
+            adminButton.addActionListener(this);
+            panel.add(adminButton);
+        }
 
         this.add(panel);
     }
@@ -59,6 +70,13 @@ public class GameHomePage extends JFrame implements ActionListener {
             this.dispose();
         } else if(e.getSource() == multiButton){
             new GameMultiMode(user, users);
+            this.dispose();
+        } else if(e.getSource() == adminButton){
+            try {
+                new AdminScreen(users);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
             this.dispose();
         }
     }
