@@ -29,10 +29,10 @@ public class GameLogin extends JFrame implements ActionListener{
 
         this.users = users;
 
-        this.setLocationRelativeTo(null); // La fenêtre apparait au centre de l'écran
         this.setDefaultCloseOperation(EXIT_ON_CLOSE); // Le processus termine quand la fenêtre est fermée
         this.setVisible(true); // On affiche la fenêtre
         this.setSize(300,300); // On fixe la taille de la fenêtre
+        this.setLocationRelativeTo(null); // La fenêtre apparait au centre de l'écran
 
         GridLayout grille = new GridLayout(6,1); // On crée une grille 6,1
         this.setLayout(grille); // On set le layout de la frame à cette grille

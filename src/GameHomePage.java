@@ -72,12 +72,7 @@ public class GameHomePage extends JFrame implements ActionListener {
             new GameMultiMode(user, users);
             this.dispose();
         } else if(e.getSource() == adminButton){
-            try {
-                new AdminScreen(users);
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-            this.dispose();
+            new AdminPage(users);
         }
     }
 }
