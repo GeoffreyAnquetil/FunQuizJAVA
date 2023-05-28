@@ -72,22 +72,40 @@ public class GameSignUp extends JFrame implements ActionListener {
         } else if(e.getSource() == signupButton){
             String prenom = prenomField.getText();
             String nom = nomField.getText();
-            int age = Integer.parseInt(ageField.getText());
-            String pseudo = pseudoField.getText();
-            String mdp = new String(mdpField.getPassword());
-
-            Utilisateur user = new Utilisateur(prenom, nom, age, pseudo, mdp, false, false);
-            HashMap<String, Utilisateur> hashMap = users.getUsers();
-            hashMap.put(user.getPseudo(), user);
-            users.setUsers(hashMap);
             try {
-                users.serialize("./src/users/usersData.csv");
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
+                String pseudo = pseudoField.getText();
+                String mdp = new String(mdpField.getPassword());
+                int age = Integer.parseInt(ageField.getText());
+                if(prenom == "") {
+                    JOptionPane.showMessageDialog(this, "veuillez entrer un prenom");
+                    prenomField.setText("");
+                } else if(nom == "") {
+                    JOptionPane.showMessageDialog(this, "veuillez entrer un nom");
+                    prenomField.setText("");
+                } else if(users.getUsers().keySet().contains(pseudo)) {
+                    JOptionPane.showMessageDialog(this, "Pseudo déjà pris, veuillez en saisir un nouveau");
+                    prenomField.setText("");
+                } else if(mdp.length() < 4){
+                    JOptionPane.showMessageDialog(this, "Votre mot de passe doit faire minimum 4 caractères");
+                    prenomField.setText("");
+                } else {
+                    Utilisateur user = new Utilisateur(prenom, nom, age, pseudo, mdp, false, false);
+                    HashMap<String, Utilisateur> hashMap = users.getUsers();
+                    hashMap.put(user.getPseudo(), user);
+                    users.setUsers(hashMap);
+                    try {
+                        users.serialize("./src/users/usersData.csv");
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
 
-            this.dispose();
-            new GameHomePage(user, users);
+                    this.dispose();
+                    new GameHomePage(user, users);
+                }
+            } catch (NumberFormatException e1){
+                JOptionPane.showMessageDialog(this, "Veuillez entrer un age correct");
+                ageField.setText("");
+            }
         }
     }
 }

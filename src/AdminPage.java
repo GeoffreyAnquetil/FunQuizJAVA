@@ -137,11 +137,11 @@ public class AdminPage extends JFrame implements ActionListener {
         } else if(e.getSource() == button2){
             // On affiche un popup pour prévenir l'utilisateur que l'action est importante
             String[] options = {"Oui", "Non"};
-            if((selection2 == "suspendu" || selection2 == "admin")
-                    && ((text != "true") && (text != "false"))){
+            if((selection2.equals("suspendu") || selection2.equals("admin"))
+                    && (!(text.equals("true")) && !(text.equals("false")))){
                 JOptionPane.showMessageDialog(this, "Veuillez saisir true ou false");
                 textField.setText("");
-            } else if((selection2 == "pseudo")
+            } else if((selection2.equals("pseudo"))
                     && (users.getUsers().keySet().contains(text))){
                 JOptionPane.showMessageDialog(this, "Pseudo déjà existant");
                 textField.setText("");
