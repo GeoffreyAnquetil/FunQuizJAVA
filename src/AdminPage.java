@@ -99,10 +99,10 @@ public class AdminPage extends JFrame implements ActionListener {
         panel4.add(buttonAnnuler);
 
         // On ajoute les panel à la fenêtre
-        this.add(panel1);
         this.add(panel2);
         this.add(panel3);
         this.add(panel4);
+        this.add(panel1);
     }
 
     @Override
@@ -212,6 +212,8 @@ public class AdminPage extends JFrame implements ActionListener {
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
+        } else if (e.getSource() == buttonSuppression){
+            new UserSuppressionPage(users);
         }
     }
 }
