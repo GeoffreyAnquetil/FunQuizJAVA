@@ -100,52 +100,67 @@ public class AdminPage extends JFrame implements ActionListener {
         String selection2 = comboBox2.getItemAt(comboBox2.getSelectedIndex());
         String text = textField.getText();
 
-        if(e.getSource() == button1){
+        if(e.getSource() == button1){ // <=> appuie sur le premier bouton "Confirmer"
+            // On affiche la dernière ligne de bouton/label etc
             label3.setVisible(true);
             textField.setVisible(true);
             button2.setVisible(true);
             button3.setVisible(true);
 
+            // On initialise le label3
             label3.setText("<html><span>" +
                             "Nouvelle valeur de " + selection2 + " pour " + selection1 + " :"
                             + "</html></span>");
             label3.setHorizontalAlignment(SwingConstants.CENTER);
+
             button1.setVisible(false); // On arrête d'afficher le bouton 1
             button1.removeActionListener(this); // On enlève son ActionListener
+            // On désactive les combobox
             comboBox1.setEnabled(false);
             comboBox2.setEnabled(false);
             panel3.revalidate(); // On actualise le panel3
-            // On ajoute les éléments au panel3
+
             panel4.revalidate(); // On actualise le panel4
 
+            // On actualise la fenêtre
             this.revalidate();
             this.repaint();
-        } else if(e.getSource() == button3){
+
+        } else if(e.getSource() == button3){ // <=> appuie sur le bouton "Annuler"
+            // On ré affiche le bouton1 et on ré active les combobox
             button1.setVisible(true);
             button1.addActionListener(this);
             comboBox1.setEnabled(true);
             comboBox2.setEnabled(true);
             panel3.revalidate();
 
+            // On dé affiche la troisième ligne
             label3.setVisible(false);
             textField.setVisible(false);
             button2.setVisible(false);
             button3.setVisible(false);
             panel4.revalidate();
+
+            // On actualise la fenêtre
             this.revalidate();
             this.repaint();
-        } else if(e.getSource() == button2){
-            // On affiche un popup pour prévenir l'utilisateur que l'action est importante
-            String[] options = {"Oui", "Non"};
+
+        } else if(e.getSource() == button2){ // <=> appuie sur le deuxième bouton "Confirmer"
+            // Si la comboBox est sur Suspendu ou Admin, on vérifie que l'utilisateur rentre bien "true" ou "false"
             if((selection2.equals("suspendu") || selection2.equals("admin"))
                     && (!(text.equals("true")) && !(text.equals("false")))){
                 JOptionPane.showMessageDialog(this, "Veuillez saisir true ou false");
                 textField.setText("");
+            // Si la comboBox est sur "pseudo" on vérifie que le pseudo saisi est bien unique
             } else if((selection2.equals("pseudo"))
-                    && (users.getUsers().keySet().contains(text))){
+                    && (users.getUsers().containsKey(text))) {
                 JOptionPane.showMessageDialog(this, "Pseudo déjà existant");
                 textField.setText("");
+            } else if(text.equals("")){
+                JOptionPane.showMessageDialog(this, "Veuillez saisir une valeur de : " + selection2);
             } else {
+                // On affiche un popup pour prévenir l'utilisateur que l'action est importante
+                String[] options = {"Oui", "Non"};
                 int choix = JOptionPane.showOptionDialog(null,
                         "Êtes-vous sûr de vouloir changer le " + selection2
                                 + " de " + selection1 + " en : " + text,
