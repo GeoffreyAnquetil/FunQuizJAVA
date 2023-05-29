@@ -15,16 +15,18 @@ public class AdminPage extends JFrame implements ActionListener {
     private final JPanel panel3 = new JPanel();
     private final JPanel panel4 = new JPanel();
 
-    private final JLabel label1 = new JLabel();
-    private final JLabel label2 = new JLabel();
-    private final JLabel label3 = new JLabel();
+    private final JLabel labelPseudo = new JLabel();
+    private final JLabel labelChamps = new JLabel();
+    private final JLabel labelModification = new JLabel();
 
-    private final JComboBox<String> comboBox1 = new JComboBox<>();
-    private final JComboBox<String> comboBox2 = new JComboBox<>();
+    private final JComboBox<String> comboBoxPseudo = new JComboBox<>();
+    private final JComboBox<String> comboBoxChamps = new JComboBox<>();
 
-    private final JButton button1 = new JButton();
-    private final JButton button2 = new JButton();
-    private final JButton button3 = new JButton();
+    private final JButton buttonAffichage = new JButton();
+    private final JButton buttonSuppression = new JButton();
+    private final JButton buttonConfirmer1 = new JButton();
+    private final JButton buttonConfirmer2 = new JButton();
+    private final JButton buttonAnnuler = new JButton();
 
     private final JTextField textField = new JTextField();
 
@@ -38,57 +40,66 @@ public class AdminPage extends JFrame implements ActionListener {
         this.setVisible(true); // On affiche la fenêtre
 
         GridLayout grillePrincipale = new GridLayout(4,1); // Grille principale de la fenêtre
-        GridLayout grilleSecondaire = new GridLayout(1,3); // Grille secondaire (pour les Panel dans la Frame principale)
-        GridLayout grillePanel4 = new GridLayout(1,4); // Grille tertiaire (pour le panel4 seulement)
+        GridLayout grillePanel1 = new GridLayout(1,2); // Grille pour le panel1
+        GridLayout grillePanel2Et3 = new GridLayout(1,3); // Grille pour le panel2 et le panel3
+        GridLayout grillePanel4 = new GridLayout(1,4); // Grille pour le panel4
 
         // Initialisation des layout pour la fenêtre et les panel
         this.setLayout(grillePrincipale);
-        panel1.setLayout(grilleSecondaire);
-        panel2.setLayout(grilleSecondaire);
-        panel3.setLayout(grilleSecondaire);
+        panel1.setLayout(grillePanel1);
+        panel2.setLayout(grillePanel2Et3);
+        panel3.setLayout(grillePanel2Et3);
         panel4.setLayout(grillePanel4);
 
         // Initialisation des comboBox
         Set<String> pseudos = users.getUsers().keySet();
-        for(String pseudo : pseudos) comboBox1.addItem(pseudo);
+        for(String pseudo : pseudos) comboBoxPseudo.addItem(pseudo);
         String[] champs = {"prenom", "nom", "age", "pseudo", "MdP", "admin", "suspendu"};
-        for(String champ : champs) comboBox2.addItem(champ);
+        for(String champ : champs) comboBoxChamps.addItem(champ);
 
         // Initialisation des label
-        label1.setText("Utilisateur à modifier :");
-        label1.setHorizontalAlignment(SwingConstants.CENTER);
-        label2.setText("Champs à modifier :");
-        label2.setHorizontalAlignment(SwingConstants.CENTER);
-        label3.setVisible(false);
+        labelPseudo.setText("Utilisateur à modifier :");
+        labelPseudo.setHorizontalAlignment(SwingConstants.CENTER);
+        labelChamps.setText("Champs à modifier :");
+        labelChamps.setHorizontalAlignment(SwingConstants.CENTER);
+        labelModification.setVisible(false);
 
         // Initialisation des boutons
-        button1.setText("Confirmer");
-        button1.addActionListener(this);
-        button2.setText("Confirmer");
-        button2.addActionListener(this);
-        button2.setVisible(false);
-        button3.setText("Annuler");
-        button3.addActionListener(this);
-        button3.setVisible(false);
+        buttonAffichage.setText("Afficher Utilisateurs");
+        buttonAffichage.addActionListener(this);
+        buttonSuppression.setText("Supprimer Utilisateur");
+        buttonSuppression.addActionListener(this);
+        buttonConfirmer1.setText("Confirmer");
+        buttonConfirmer1.addActionListener(this);
+        buttonConfirmer2.setText("Confirmer");
+        buttonConfirmer2.addActionListener(this);
+        buttonConfirmer2.setVisible(false);
+        buttonAnnuler.setText("Annuler");
+        buttonAnnuler.addActionListener(this);
+        buttonAnnuler.setVisible(false);
 
         // On rend invisible le textfield
         textField.setVisible(false);
 
+        // On remplie le panel1
+        panel1.add(buttonAffichage);
+        panel1.add(buttonSuppression);
         // On remplie le panel2
-        panel2.add(label1);
-        panel2.add(comboBox1);
+        panel2.add(labelPseudo);
+        panel2.add(comboBoxPseudo);
         panel2.add(new JLabel(""));
         // On remplie le panel3
-        panel3.add(label2);
-        panel3.add(comboBox2);
-        panel3.add(button1);
+        panel3.add(labelChamps);
+        panel3.add(comboBoxChamps);
+        panel3.add(buttonConfirmer1);
         // On remplie le panel4
-        panel4.add(label3);
+        panel4.add(labelModification);
         panel4.add(textField);
-        panel4.add(button2);
-        panel4.add(button3);
+        panel4.add(buttonConfirmer2);
+        panel4.add(buttonAnnuler);
 
         // On ajoute les panel à la fenêtre
+        this.add(panel1);
         this.add(panel2);
         this.add(panel3);
         this.add(panel4);
@@ -96,28 +107,28 @@ public class AdminPage extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String selection1 = comboBox1.getItemAt(comboBox1.getSelectedIndex());
-        String selection2 = comboBox2.getItemAt(comboBox2.getSelectedIndex());
+        String selection1 = comboBoxPseudo.getItemAt(comboBoxPseudo.getSelectedIndex());
+        String selection2 = comboBoxChamps.getItemAt(comboBoxChamps.getSelectedIndex());
         String text = textField.getText();
 
-        if(e.getSource() == button1){ // <=> appuie sur le premier bouton "Confirmer"
+        if(e.getSource() == buttonConfirmer1){ // <=> appuie sur le premier bouton "Confirmer"
             // On affiche la dernière ligne de bouton/label etc
-            label3.setVisible(true);
+            labelModification.setVisible(true);
             textField.setVisible(true);
-            button2.setVisible(true);
-            button3.setVisible(true);
+            buttonConfirmer2.setVisible(true);
+            buttonAnnuler.setVisible(true);
 
             // On initialise le label3
-            label3.setText("<html><span>" +
+            labelModification.setText("<html><span>" +
                             "Nouvelle valeur de " + selection2 + " pour " + selection1 + " :"
                             + "</html></span>");
-            label3.setHorizontalAlignment(SwingConstants.CENTER);
+            labelModification.setHorizontalAlignment(SwingConstants.CENTER);
 
-            button1.setVisible(false); // On arrête d'afficher le bouton 1
-            button1.removeActionListener(this); // On enlève son ActionListener
+            buttonConfirmer1.setVisible(false); // On arrête d'afficher le bouton 1
+            buttonConfirmer1.removeActionListener(this); // On enlève son ActionListener
             // On désactive les combobox
-            comboBox1.setEnabled(false);
-            comboBox2.setEnabled(false);
+            comboBoxPseudo.setEnabled(false);
+            comboBoxChamps.setEnabled(false);
             panel3.revalidate(); // On actualise le panel3
 
             panel4.revalidate(); // On actualise le panel4
@@ -126,26 +137,26 @@ public class AdminPage extends JFrame implements ActionListener {
             this.revalidate();
             this.repaint();
 
-        } else if(e.getSource() == button3){ // <=> appuie sur le bouton "Annuler"
+        } else if(e.getSource() == buttonAnnuler){ // <=> appuie sur le bouton "Annuler"
             // On ré affiche le bouton1 et on ré active les combobox
-            button1.setVisible(true);
-            button1.addActionListener(this);
-            comboBox1.setEnabled(true);
-            comboBox2.setEnabled(true);
+            buttonConfirmer1.setVisible(true);
+            buttonConfirmer1.addActionListener(this);
+            comboBoxPseudo.setEnabled(true);
+            comboBoxChamps.setEnabled(true);
             panel3.revalidate();
 
             // On dé affiche la troisième ligne
-            label3.setVisible(false);
+            labelModification.setVisible(false);
             textField.setVisible(false);
-            button2.setVisible(false);
-            button3.setVisible(false);
+            buttonConfirmer2.setVisible(false);
+            buttonAnnuler.setVisible(false);
             panel4.revalidate();
 
             // On actualise la fenêtre
             this.revalidate();
             this.repaint();
 
-        } else if(e.getSource() == button2){ // <=> appuie sur le deuxième bouton "Confirmer"
+        } else if(e.getSource() == buttonConfirmer2){ // <=> appuie sur le deuxième bouton "Confirmer"
             // Si la comboBox est sur Suspendu ou Admin, on vérifie que l'utilisateur rentre bien "true" ou "false"
             if((selection2.equals("suspendu") || selection2.equals("admin"))
                     && (!(text.equals("true")) && !(text.equals("false")))){
@@ -194,6 +205,12 @@ public class AdminPage extends JFrame implements ActionListener {
                 } else { // S'il clique sur "non" ou ferme la fenêtre
                     textField.setText("");
                 }
+            }
+        } else if (e.getSource() == buttonAffichage){
+            try {
+                new UsersTab();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
             }
         }
     }
