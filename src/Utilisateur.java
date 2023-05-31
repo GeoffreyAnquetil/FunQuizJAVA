@@ -1,6 +1,10 @@
 import java.io.Serial;
 import java.io.Serializable;
 
+/**
+ * Extends Personne en ajoutant des attributs propres à des utilisateurs d'un jeu (pseudo, mdp, isadmin, suspendu)
+ * Et ajoute des méthode de sérialisation pour stocker de manière durable
+ */
 public class Utilisateur extends Personne implements Serializable {
 
     private String pseudo;
@@ -21,6 +25,10 @@ public class Utilisateur extends Personne implements Serializable {
         this.suspendu = suspendu;
     }
 
+    /**
+     * Convertie un Utilisateur en String avec chaque attribut séparé par ";"
+     * @return
+     */
     @Override
     public String toString(){
         return this.getPrenom() + ";" + this.getNom() + ";" + this.getAge() + ";"
