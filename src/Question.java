@@ -1,5 +1,8 @@
 import java.io.Serializable;
 
+/**
+ * Une question constituée d'un intitulé, de propositions, d'un thème, d'une réponse et de points définis
+ */
 public class Question implements Serializable {
     private String difficulte;
     private String intitule;
@@ -27,6 +30,10 @@ public class Question implements Serializable {
 
     public Question(){}
 
+    /**
+     * Convertie une question en string
+     * @return chaque attribut séparé du précédent par ";"
+     */
     public String toString(){
         return difficulte + ";" + intitule + ";" + theme + ";" +
                 option1 + ";" + option2 + ";" + option3 + ";" + option4 + ";" +
