@@ -2,6 +2,9 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Représente une liste de questions
+ */
 public class Questions implements Serializable {
 
     private ArrayList<Question> questions = new ArrayList<>();
@@ -12,6 +15,10 @@ public class Questions implements Serializable {
         this.questions = questions;
     }
 
+    /**
+     * Convertie une liste de Question en String avec chaque Question séparé d'une autre par "/"
+     * @return
+     */
     @Override
     public String toString(){
         StringBuilder chaine = new StringBuilder();
