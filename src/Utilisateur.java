@@ -23,8 +23,8 @@ public class Utilisateur extends Personne implements Serializable {
 
     @Override
     public String toString(){
-        return this.getPrenom() + "," + this.getNom() + "," + this.getAge() + ","
-                + pseudo + "," + mdp + "," + isAdmin + "," + suspendu;
+        return this.getPrenom() + ";" + this.getNom() + ";" + this.getAge() + ";"
+                + pseudo + ";" + mdp + ";" + isAdmin + ";" + suspendu;
     }
 
     public boolean isAdmin() {

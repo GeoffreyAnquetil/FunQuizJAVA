@@ -3,34 +3,42 @@ import java.io.Serializable;
 public class Question implements Serializable {
     private String difficulte;
     private String intitule;
+    private String theme;
     private String option1;
     private String option2;
     private String option3;
     private String option4;
     private String reponse;
     private int points;
-    private boolean DejaChoisi;
 
-    public Question(String difficulte, String intitule,
+    public Question(String difficulte, String intitule, String theme,
                     String option1, String option2, String option3, String option4,
-                    String reponse, int points, boolean dejaChoisi) {
+                    String reponse, int points) {
         this.difficulte = difficulte;
         this.intitule = intitule;
+        this.theme = theme;
         this.option1 = option1;
         this.option2 = option2;
         this.option3 = option3;
         this.option4 = option4;
         this.reponse = reponse;
         this.points = points;
-        DejaChoisi = dejaChoisi;
     }
 
     public Question(){}
 
     public String toString(){
-        return difficulte + "," + intitule + "," +
-                option1 + "," + option2 + "," + option3 + "," + option4 + "," +
-                reponse + "," + points + "," + DejaChoisi;
+        return difficulte + ";" + intitule + ";" + theme + ";" +
+                option1 + ";" + option2 + ";" + option3 + ";" + option4 + ";" +
+                reponse + ";" + points;
+    }
+
+    public String getTheme() {
+        return theme;
+    }
+
+    public void setTheme(String theme) {
+        this.theme = theme;
     }
 
     public String getDifficulte() {
@@ -48,8 +56,6 @@ public class Question implements Serializable {
     public String getReponse() {
         return reponse;
     }
-
-    public boolean getDejaChoisi(){ return DejaChoisi;}
 
     public String getOption1() {
         return option1;
@@ -85,10 +91,6 @@ public class Question implements Serializable {
 
     public boolean vérifie(String elt){
         return (this.reponse==elt);
-    }
-
-    public void setDejaChoisi(boolean dejaChoisi) {
-        DejaChoisi = dejaChoisi;
     }
 
     public void setOption1(String option1) {

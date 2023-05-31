@@ -33,7 +33,7 @@ public class Questions implements Serializable {
         //Pour chaque String de questions
         for(String q : qs){
             //On split les données des questions par "," et on les ajoute à array
-            array.add(q.split(","));
+            array.add(q.split(";"));
         }
 
         //On instancie un CSVFileIO et on écrit l'array dans un fichier destination au format CSV
@@ -57,11 +57,13 @@ public class Questions implements Serializable {
                     q[4],
                     q[5],
                     q[6],
-                    Integer.parseInt(q[7]),
-                    Boolean.parseBoolean(q[8]));
+                    q[7],
+                    Integer.parseInt(q[8]));
             this.questions.add(question);
         }
     }
+
+    public void addQuestion(Question question){ this.questions.add(question);}
 
     public ArrayList<Question> getQuestions() {
         return questions;

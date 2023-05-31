@@ -36,7 +36,7 @@ public class Utilisateurs implements Serializable {
         //Pour chaque String d'utilisateur
         for(String utilisateur : utilisateurs){
             //On split les données de l'utilisateur par "," et on les ajoute à array
-            array.add(utilisateur.split(","));
+            array.add(utilisateur.split(";"));
         }
 
         //On instancie un CSVFileIO et on écrit l'array dans un fichier destination au format CSV

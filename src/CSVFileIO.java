@@ -21,7 +21,7 @@ public class CSVFileIO {
         try (fileWriter; BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
             for (String[] line : array) {
                 for (String elt : line) {
-                    bufferedWriter.write(elt + ",");
+                    bufferedWriter.write(elt + ";");
                 }
                 bufferedWriter.newLine();
             }
@@ -43,7 +43,7 @@ public class CSVFileIO {
 
         String line;
         while((line = bufferedReader.readLine()) != null){
-            tab.add(line.split(","));
+            tab.add(line.split(";"));
         }
         return tab;
     }

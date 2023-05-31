@@ -27,6 +27,7 @@ public class AdminPage extends JFrame implements ActionListener {
     private final JButton buttonConfirmer1 = new JButton();
     private final JButton buttonConfirmer2 = new JButton();
     private final JButton buttonAnnuler = new JButton();
+    private final JButton buttonQuestion = new JButton();
 
     private final JTextField textField = new JTextField();
 
@@ -34,12 +35,12 @@ public class AdminPage extends JFrame implements ActionListener {
         super("Administration");
         this.users = users;
 
-        this.setSize(600,250); // On initialise la taille de la fenêtre
+        this.setSize(700,250); // On initialise la taille de la fenêtre
         this.setLocationRelativeTo(null); // La fenêtre apparait au centre de l'écran
         this.setDefaultCloseOperation(HIDE_ON_CLOSE); // Le processus termine quand la fenêtre est fermée
         this.setVisible(true); // On affiche la fenêtre
 
-        GridLayout grillePrincipale = new GridLayout(4,1); // Grille principale de la fenêtre
+        GridLayout grillePrincipale = new GridLayout(5,1); // Grille principale de la fenêtre
         GridLayout grillePanel1 = new GridLayout(1,2); // Grille pour le panel1
         GridLayout grillePanel2Et3 = new GridLayout(1,3); // Grille pour le panel2 et le panel3
         GridLayout grillePanel4 = new GridLayout(1,4); // Grille pour le panel4
@@ -77,6 +78,8 @@ public class AdminPage extends JFrame implements ActionListener {
         buttonAnnuler.setText("Annuler");
         buttonAnnuler.addActionListener(this);
         buttonAnnuler.setVisible(false);
+        buttonQuestion.setText("Ajouter une question");
+        buttonQuestion.addActionListener(this);
 
         // On rend invisible le textfield
         textField.setVisible(false);
@@ -98,11 +101,12 @@ public class AdminPage extends JFrame implements ActionListener {
         panel4.add(buttonConfirmer2);
         panel4.add(buttonAnnuler);
 
-        // On ajoute les panel à la fenêtre
+        // On ajoute les panel et le dernier bouton à la fenêtre
         this.add(panel2);
         this.add(panel3);
         this.add(panel4);
         this.add(panel1);
+        this.add(buttonQuestion);
     }
 
     @Override
@@ -214,6 +218,12 @@ public class AdminPage extends JFrame implements ActionListener {
             }
         } else if (e.getSource() == buttonSuppression){
             new UserSuppressionPage(users);
+        } else if (e.getSource() == buttonQuestion){
+            try {
+                new QuestionCreationPage();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }
 }
