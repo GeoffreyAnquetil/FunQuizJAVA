@@ -1,6 +1,9 @@
 import java.io.Serial;
 import java.io.Serializable;
 
+/**
+ * Représente une personne ayant un prénom, un nom et un âge
+ */
 public class Personne implements Serializable {
 
     private String prenom;
@@ -13,6 +16,10 @@ public class Personne implements Serializable {
 
     public Personne(){}
 
+    /**
+     * Convertie une Personne en String avec chaque attribut séparé par un ";"
+     * @return
+     */
     @Override
     public String toString(){
         return prenom + "," + nom + "," + age;
