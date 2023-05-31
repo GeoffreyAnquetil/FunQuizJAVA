@@ -22,6 +22,7 @@ public class UsersTab extends JFrame {
         //Les titres des colonnes
         String[] champs = {"prenom", "nom", "age", "pseudo", "MdP", "admin", "suspendu"};
         JTable tableau = new JTable(data, champs);
+        tableau.setEnabled(false);
         //Nous ajoutons notre tableau à notre contentPane dans un scroll
         this.getContentPane().add(new JScrollPane(tableau));
     }

@@ -105,6 +105,8 @@ public class GameSignUp extends JFrame implements ActionListener {
             } catch (NumberFormatException e1){
                 JOptionPane.showMessageDialog(this, "Veuillez entrer un age correct");
                 ageField.setText("");
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
             }
         }
     }

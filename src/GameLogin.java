@@ -68,7 +68,11 @@ public class GameLogin extends JFrame implements ActionListener{
                 JOptionPane.showMessageDialog(this, "Compte suspendu, impossible de se connecter");
             } else {
                 this.dispose();
-                new GameHomePage(users.getUsers().get(userID), users);
+                try {
+                    new GameHomePage(users.getUsers().get(userID), users);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         } else if(e.getSource() == signUpButton){
             this.dispose();
