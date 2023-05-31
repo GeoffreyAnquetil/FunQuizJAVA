@@ -1,10 +1,10 @@
 # FunQuizJAVA
 Quiz with UI in java by CHEN Alex and ANQUETIL Geoffrey
 
-JAVA Version : java 19
+java version "20.0.1" 2023-04-18
 IDE : Intellij with Liscence
 
-Un executable quiz.jar est disponible à la racine du projet.
+Pour lancer le jeu, ouvrir un terminal dans le dossier JAVAProjet et exécuter la commande $java Main
 
 Les différentes façons de tester le programme :
     Au lancemement, vous pouvez au choix :
