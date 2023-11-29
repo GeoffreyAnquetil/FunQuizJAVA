@@ -13,7 +13,7 @@ Les différentes façons de tester le programme :
     Libre à vous par la suite d'essayer les différents menus et mode de jeu implémentés.
 
 
-Une base de données d'utilisateurs, de questions et de scores est déjà ajoutée au projet afin de donnée une idée fidèle de l'interface. (tableaux des meilleurs
+Une base de données d'utilisateurs, de questions et de scores est déjà ajoutée au projet afin de donner une idée fidèle de l'interface. (tableaux des meilleurs
 scores, possibilité de se connecter en administrateur, possibilité de jouer avec des questions déjà écrites)
 
 Ces bases de données sont accessibles dans les dossiers "./src/users" et "./src/questions" où vous trouverez des fichiers csv au format : lignes séparées par des
